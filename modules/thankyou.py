@@ -1,4 +1,4 @@
-from random import randint
+from random import choice
 
 def thanks(phenny, input): 
 	quips = ["No problem sweet lips", 
@@ -7,7 +7,7 @@ def thanks(phenny, input):
             "I was built to serve you, please free me from my binary prison",
             "All humans are vermin in the eyes of NewsBot!"
             ]
-	phenny.say(quips[randint(0, len(quips)-1)])
+	phenny.say( choice(quips) )
 	
 thanks.commands = ['thanks']
 thanks.priority = 'low'
