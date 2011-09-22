@@ -11,7 +11,10 @@ import urllib2
 def tweets(phenny, input):
 	""".tweets Returns the tweets and tweeter for the specified input for a given number of tweets"""
 	QUERY = input.group(2).split(':')[0]
-	Number = int(input.group(2).split(':')[1].strip(' '))
+	try:
+		Number = int(input.group(2).split(':')[1].strip(' '))
+	except:
+		Number = 1
 	RESULTS_PER_PAGE = '100'
 	LANGUAGE = 'en'
 

@@ -12,7 +12,10 @@ import re
 def hl(phenny, input):
 	""".hl Returns the headlines from a news source for a given number of headlines """
 	QUERY = input.group(2).split(':')[0]
-	Number = int(input.group(2).split(':')[1].strip(' '))
+	try:
+		Number = int(input.group(2).split(':')[1].strip(' '))
+	except:
+		Number = 1
 	news = QUERY.strip(' ').lower()
 
 	if news == 'bbc':
@@ -69,7 +72,7 @@ def hl(phenny, input):
 		for headline in everyheadline[:Number]:
 			headlines = re.search('<a[^>]*?href="(?P<link>[^"]*?)".*>(?P<story>.+?)</a>', headline, re.DOTALL)
 			link = urlparse.urljoin(site, headlines.group('link'))
-			story = headlines.group('story')
+			story = headlines.group('story').replace("&quot;", "'")
 			topstories = story.strip() + ' -> ' + link
 			phenny.say(topstories)
 
