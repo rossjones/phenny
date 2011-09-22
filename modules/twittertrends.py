@@ -31,7 +31,7 @@ trends.commands = ['trends']
 trends.priority = 'medium'
 trends.example = '.trends London'
     
-if __name__ == _main_:
+if __name__ == '__main__':
 	print __doc__.strip()
 
 	

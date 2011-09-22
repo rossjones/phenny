@@ -30,5 +30,5 @@ tweets.commands = ['tweets']
 tweets.priority = 'medium'
 tweets.example = '.tweets searchterm: number i.e. .tweets Mojo: 2'
 
-if __name__ == _main_:
+if __name__ == '__main__':
 	print __doc__.strip()

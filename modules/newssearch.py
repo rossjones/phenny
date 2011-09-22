@@ -25,3 +25,6 @@ def gn(phenny, input):
 gn.commands = ['gn']
 gn.priority = 'high'
 gn.example = '.gn searchterm: number i.e. Syria: 3'
+
+if __name__ == '__main__':
+	print __doc__.strip()

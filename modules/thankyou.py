@@ -19,5 +19,5 @@ def thanks(phenny, input):
 thanks.commands = ['thanks']
 thanks.priority = 'low'
 
-if __name__ == _main_:
+if __name__ == '__main__':
 	print __doc__.strip()
