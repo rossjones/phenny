@@ -42,12 +42,15 @@ class Bot(asynchat.async_chat):
       import threading
       self.sending = threading.RLock()
 
+   # def push(self, *args, **kargs): 
+   #    asynchat.async_chat.push(self, *args, **kargs)
+
    def __write(self, args, text=None): 
       # print '%r %r %r' % (self, args, text)
       try: 
          if text is not None: 
-            self.push(' '.join(args) + ' :' + text + '\r\n')
-         else: self.push(' '.join(args) + '\r\n')
+            self.push((' '.join(args) + ' :' + text)[:512] + '\r\n')
+         else: self.push(' '.join(args)[:512] + '\r\n')
       except IndexError: 
          pass
 
@@ -148,7 +151,10 @@ class Bot(asynchat.async_chat):
             self.sending.release()
             return
 
-      self.__write(('PRIVMSG', recipient), text)
+      def safe(input): 
+         input = input.replace('\n', '')
+         return input.replace('\r', '')
+      self.__write(('PRIVMSG', safe(recipient)), safe(text))
       self.stack.append((time.time(), text))
       self.stack = self.stack[-10:]
 
