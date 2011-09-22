@@ -1,3 +1,10 @@
+"""
+            thankyou.py - Phenny Thankyou Module
+            Copyright 2011, Nicola Hughes
+            Licensed under the Eiffel Forum License 2.
+            
+"""
+
 from random import randint
 
 def thanks(phenny, input): 
@@ -7,7 +14,10 @@ def thanks(phenny, input):
             "I was built to serve you, please free me from my binary prison",
             "All humans are vermin in the eyes of NewsBot!"
             ]
-	phenny.say(quips[randint(0, len(quips)-1)])
+	phenny.reply(quips[randint(0, len(quips)-1)])
 	
 thanks.commands = ['thanks']
 thanks.priority = 'low'
+
+if __name__ == _main_:
+	print __doc__.strip()
