@@ -80,5 +80,6 @@ hl.commands = ['hl']
 hl.priority = 'high'
 hl.example = '.hl newssource: number i.e. .story guardian: 3'
 
-if __name__ == _main_:
+
+if __name__ == '__main__':
 	print __doc__.strip()
