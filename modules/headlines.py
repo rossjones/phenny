@@ -60,6 +60,7 @@ def hl(phenny, input):
 			topstories = story.strip() + ' -> ' + link
 			phenny.say(topstories)
 			
+	#this checks Reuters homepage
 	elif news == 'reuters':
 		site = 'http://uk.reuters.com/'
 		html = urllib2.urlopen(site).read()
