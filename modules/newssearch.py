@@ -20,8 +20,8 @@ def gn(phenny, input):
 	links = obj.getElementsByTagName('link')[2:]
 	for element in elements[:Number]:
 		headline =  element.childNodes[0].data
-		for link in links:
-			url = link.childNodes[0].data.split('=')[-1]
+	for link in links[:Number]:
+		url = link.childNodes[0].data.split('=')[-1]
 		newssearch = headline + ' -> ' + url
 		phenny.say(newssearch)
     
