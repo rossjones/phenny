@@ -10,9 +10,9 @@ from xml.dom.minidom import parseString
 
 def gn(phenny, input):
 	""".gn Returns the headline and link from Google News for a given search term for a given number """
-	QUERY = input.group(2).split(':')[0]
+	QUERY = input.group(2).split(',')[0]
 	try:
-		Number = int(input.group(2).split(':')[1].strip(' '))
+		Number = int(input.group(2).split(',')[1].strip(' '))
 	except:
 		Number = 1
 	obj = parseString( urllib2.urlopen('http://news.google.com/news?q=%s&output=rss' % QUERY).read() )
@@ -27,7 +27,7 @@ def gn(phenny, input):
     
 gn.commands = ['gn']
 gn.priority = 'high'
-gn.example = '.gn searchterm: number i.e. Syria: 3'
+gn.example = '.gn searchterm, number i.e. Syria, 3'
 
 if __name__ == '__main__':
 	print __doc__.strip()

@@ -10,9 +10,9 @@ import urllib2
 
 def tweets(phenny, input):
 	""".tweets Returns the tweets and tweeter for the specified input for a given number of tweets"""
-	QUERY = input.group(2).split(':')[0]
+	QUERY = input.group(2).split(',')[0]
 	try:
-		Number = int(input.group(2).split(':')[1].strip(' '))
+		Number = int(input.group(2).split(',')[1].strip(' '))
 	except:
 		Number = 1
 	RESULTS_PER_PAGE = '100'
@@ -31,7 +31,7 @@ def tweets(phenny, input):
 
 tweets.commands = ['tweets']
 tweets.priority = 'medium'
-tweets.example = '.tweets searchterm: number i.e. .tweets Mojo: 2'
+tweets.example = '.tweets searchterm, number i.e. .tweets Mojo, 2'
 
 if __name__ == '__main__':
 	print __doc__.strip()

@@ -12,9 +12,9 @@ import json
 def spads(phenny, input):
 	""".spads Returns the lastest meeting by a given Special Adviser in Number 10 or a given organisation for a given number
 	Current Spads are: Robert Riddell, Flora Coleman, Naweed Khan, Laura Trott, James McGory, Chris Saunders, Richard Reeves, Jonny Oates, Alan Sendorek, Michael Salter, Lena Pietsch, James O'Shaugnessy, Craig Oliver, Polly Mackenzie, Ed Llewellyn, Sean Kemp, Steve Hilton, Tim Colbourne, Tim Chatwin, Gabby Bertin, Martha Varney, Alison Suttie, Rohan Silva, Henry Macrory, Catherine Fall, Andy Coulson, Sean Worth, and Chris White"""
-	userinput = input.group(2).split(':')[0]
+	userinput = input.group(2).split(',')[0]
 	try:
-		Number = int(input.group(2).split(':')[1].strip(' '))
+		Number = int(input.group(2).split(',')[1].strip(' '))
 	except:
 		Number = 1
 		
@@ -89,7 +89,7 @@ def spads(phenny, input):
 		
 spads.commands = ["spads"]
 spads.priority = 'medium'
-spads.example = '.spads name of special adviser OR organisation: number i.e. .spads Andy Coulson: 4 OR .spads BBC: 3'
+spads.example = '.spads name of special adviser OR organisation, number i.e. .spads Andy Coulson, 4 OR .spads BBC, 3'
 
 if __name__ == '__main__':
 	print __doc__.strip()

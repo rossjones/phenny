@@ -11,9 +11,9 @@ import re
 
 def hl(phenny, input):
 	""".hl Returns the headlines from a news source for a given number of headlines """
-	QUERY = input.group(2).split(':')[0]
+	QUERY = input.group(2).split(',')[0]
 	try:
-		Number = int(input.group(2).split(':')[1].strip(' '))
+		Number = int(input.group(2).split(',')[1].strip(' '))
 	except:
 		Number = 1
 	news = QUERY.strip(' ').lower()
@@ -81,7 +81,7 @@ def hl(phenny, input):
 		
 hl.commands = ['hl']
 hl.priority = 'high'
-hl.example = '.hl newssource: number i.e. .story guardian: 3'
+hl.example = '.hl newssource, number i.e. .story guardian, 3'
 
 
 if __name__ == '__main__':
