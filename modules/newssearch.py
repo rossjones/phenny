@@ -18,10 +18,11 @@ def gn(phenny, input):
 	obj = parseString( urllib2.urlopen('http://news.google.com/news?q=%s&output=rss' % QUERY).read() )
 	elements = obj.getElementsByTagName('title')[2:] # To get rid of unwanted title elements in XML doc
 	links = obj.getElementsByTagName('link')[2:]
+	i = 0
 	for element in elements[:Number]:
 		headline =  element.childNodes[0].data
-	for link in links[:Number]:
-		url = link.childNodes[0].data.split('=')[-1]
+		url = links[i].childNodes[0].data.split('=')[-1]
+		i=i+1
 		newssearch = headline + ' -> ' + url
 		phenny.say(newssearch)
     

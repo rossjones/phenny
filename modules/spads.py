@@ -14,6 +14,11 @@ def spads(phenny, input):
 	Current Spads are: Robert Riddell, Flora Coleman, Naweed Khan, Laura Trott, James McGory, Chris Saunders, Richard Reeves, Jonny Oates, Alan Sendorek, Michael Salter, Lena Pietsch, James O'Shaugnessy, Craig Oliver, Polly Mackenzie, Ed Llewellyn, Sean Kemp, Steve Hilton, Tim Colbourne, Tim Chatwin, Gabby Bertin, Martha Varney, Alison Suttie, Rohan Silva, Henry Macrory, Catherine Fall, Andy Coulson, Sean Worth, and Chris White"""
 	userinput = input.group(2).split(',')[0]
 	try:
+		userdate = input.group(2).split(',')[2].strip(' ')
+	except:
+		userdate = None
+	
+	try:
 		Number = int(input.group(2).split(',')[1].strip(' '))
 	except:
 		Number = 1
@@ -23,6 +28,8 @@ def spads(phenny, input):
 	listspad = []
 	for name in jsonspadapi:
 		listspad.append(name["Name of Special Adviser"])
+	print listspad	
+	print userinput
 		
 	orgapi = 'https://api.scraperwiki.com/api/1.0/datastore/sqlite?format=jsondict&name=special_advisers_gifts_and_hospitality&query=SELECT%20%60Name%20of%20Organisation%60%20FROM%20swdata%20GROUP%20BY%20%60Name%20of%20Organisation%60'
 	jsonorgapi = json.loads(urllib2.urlopen(orgapi).read())
@@ -39,7 +46,10 @@ def spads(phenny, input):
     
 	if userinput in listspad:
         # User input exactly matches a special advisor, do queries etc here
-		query = 'SELECT `Name of Special Adviser`, `Type of hospitality received`, `Name of Organisation`, `Date of Hospitality` FROM swdata WHERE `Name of Special Adviser` = "%s" ORDER BY `Date of Hospitality` desc' % userinput
+		if userdate != None:
+			query = ('SELECT `Name of Special Adviser`, `Type of hospitality received`, `Name of Organisation`, `Date of Hospitality` FROM swdata WHERE `Name of Special Adviser` = "%s" AND `Date of Hospitality` BETWEEN "%s-00" AND "%s-32" ORDER BY `Date of Hospitality` desc' % (userinput, userdate, userdate))
+		else:
+			query = ('SELECT `Name of Special Adviser`, `Type of hospitality received`, `Name of Organisation`, `Date of Hospitality` FROM swdata WHERE `Name of Special Adviser` = "%s" ORDER BY `Date of Hospitality` desc' % userinput)
 	
 		params = { 'format': type, 'name': scraper, 'query': query}	
 	
@@ -61,8 +71,12 @@ def spads(phenny, input):
             # Do a case insensitive substring check
 			if userinput.lower() in org.lower():
                 # Found the org, do queries etc here
-				query = "SELECT `Name of Special Adviser`, `Type of hospitality received`, `Name of Organisation`, `Date of Hospitality` FROM swdata WHERE `Name of Organisation` LIKE  '%" + userinput + "%' ORDER BY `Date of Hospitality` desc"
-	
+				if userdate != None:
+					query = ('SELECT `Name of Special Adviser`, `Type of hospitality received`, `Name of Organisation`, `Date of Hospitality` FROM swdata WHERE (`Date of Hospitality` BETWEEN "%s-00" AND "%s-32") AND `Name of Organisation` LIKE  "%%%s%%"  ORDER BY `Date of Hospitality` desc' % (userdate, userdate, userinput))
+					print query
+				else:
+					query = "SELECT `Name of Special Adviser`, `Type of hospitality received`, `Name of Organisation`, `Date of Hospitality` FROM swdata WHERE `Name of Organisation` LIKE  '%" + userinput + "%' ORDER BY `Date of Hospitality` desc"
+#				phenny.say(query)
 				params = { 'format': type, 'name': scraper, 'query': query}	
 	
 				url = site + urllib.urlencode(params)
