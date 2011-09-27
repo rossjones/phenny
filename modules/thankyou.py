@@ -1,4 +1,11 @@
-from random import choice
+"""
+            thankyou.py - Phenny Thankyou Module
+            Copyright 2011, Nicola Hughes
+            Licensed under the Eiffel Forum License 2.
+            
+"""
+
+from random import randint
 
 def thanks(phenny, input): 
 	quips = ["No problem sweet lips", 
@@ -7,7 +14,11 @@ def thanks(phenny, input):
             "I was built to serve you, please free me from my binary prison",
             "All humans are vermin in the eyes of NewsBot!"
             ]
-	phenny.say( choice(quips) )
+	phenny.reply(quips[randint(0, len(quips)-1)])
 	
 thanks.commands = ['thanks']
 thanks.priority = 'low'
+
+if __name__ == '__main__':
+	print __doc__.strip()
+

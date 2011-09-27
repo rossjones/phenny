@@ -33,6 +33,7 @@ def twitter_get(user):
    return '%s: %s' % (user, status.group(4))
 
 def lasttweet(phenny, input): 
+   """.lasttweet Returns the last tweet for a given tweeter """
    origuser = input.groups()[1]
    if not origuser: 
       return phenny.say('Perhaps you meant ".twitter rmccue"?')
@@ -51,6 +52,8 @@ def lasttweet(phenny, input):
    else: phenny.say('%s has not yet updated or doesn\'t exist.' % origuser)
 
 lasttweet.commands = ['lasttweet']
+lasttweet.priority = 'medium'
+lasttweet.example = '.lasttweet @tweeter i.e. .lasttweet @datamineruk'
 
 def twitter_background(phenny, input):
 	global twitterers, tweets, last_updated, displaying_updates
